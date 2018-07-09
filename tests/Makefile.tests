@@ -76,13 +76,13 @@ tests_clean:
 	rm -f $(TESTS_CLEANFILES)
 
 check:	tests ${TESTS_BIN} $(TESTS_PYLIBFDT)
-	cd $(TESTS_PREFIX); ./run_tests.sh
+	cd $(TESTS_PREFIX); PYTHON=$(PYTHON) ./run_tests.sh
 
 checkm: tests ${TESTS_BIN} $(TESTS_PYLIBFDT)
-	cd $(TESTS_PREFIX); ./run_tests.sh -m 2>&1 | tee vglog.$$$$
+	cd $(TESTS_PREFIX); PYTHON=$(PYTHON) ./run_tests.sh -m 2>&1 | tee vglog.$$$$
 
 checkv:	tests ${TESTS_BIN} $(TESTS_PYLIBFDT)
-	cd $(TESTS_PREFIX); ./run_tests.sh -v
+	cd $(TESTS_PREFIX); PYTHON=$(PYTHON) ./run_tests.sh -v
 
 ifneq ($(DEPTARGETS),)
 -include $(TESTS_DEPFILES)

@@ -8,13 +8,13 @@ PYMODULE = $(PYLIBFDT_objdir)/_libfdt.so
 define run_setup
 	SOURCES="$(1)" CPPFLAGS="$(CPPFLAGS)" OBJDIR="$(PYLIBFDT_objdir)"
 	VERSION="$(dtc_version)"
-	$(PYLIBFDT_objdir)/setup.py --quiet $(2)
+	$(PYTHON) $(PYLIBFDT_objdir)/setup.py --quiet $(2)
 endef
 
 $(PYMODULE): $(PYLIBFDT_srcs)
 	@$(VECHO) PYMOD $@
 	$(call run_setup, $^, build_ext --inplace)
-	mv _libfdt.so $@
+	mv _libfdt.*so $@
 
 install_pylibfdt: $(PYMODULE)
 	$(VECHO) INSTALL-PYLIB; \
